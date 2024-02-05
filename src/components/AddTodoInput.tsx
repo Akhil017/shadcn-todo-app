@@ -4,7 +4,7 @@ import { Button } from "./ui/button";
 export function AddTodoInput() {
   return (
     <div className="max-w-md w-full mx-auto flex gap-4">
-      <Input type="email" placeholder="Email" />
+      <Input type="email" placeholder="Email" className="bg-white" />
       <Button variant="default">Add Todo</Button>
     </div>
   );
