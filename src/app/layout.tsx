@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import { cn } from "@/lib/utils";
+import { ThemeProvider } from "@/providers/ThemeProvider";
 import "./globals.css";
+import { ThemeToggle } from "@/components/ThemeToggle";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -17,7 +18,19 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={cn("bg-hero-pattern", inter.className)}>{children}</body>
+      <ThemeProvider
+        attribute="class"
+        defaultTheme="system"
+        enableSystem
+        disableTransitionOnChange
+      >
+        <body className={inter.className}>
+          <div className="flex items-center justify-end px-8 py-4">
+            <ThemeToggle />
+          </div>
+          {children}
+        </body>
+      </ThemeProvider>
     </html>
   );
 }
