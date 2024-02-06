@@ -1,6 +1,7 @@
 import { AddTodoInput } from "@/components/AddTodoInput";
 import { CustomButtons } from "@/components/CustomButton";
 import TodoList from "@/components/TodoList";
+import { Button } from "@/components/ui/button";
 
 export default function Home() {
   return (
@@ -9,7 +10,6 @@ export default function Home() {
       <div>
         <TodoList />
       </div>
-      <CustomButtons />
     </main>
   );
 }
