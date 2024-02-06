@@ -1,14 +1,21 @@
+"use client";
+
 import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
-  CardDescription,
   CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
 import { Badge } from "./ui/badge";
+import {
+  DropdownMenu,
+  DropdownMenuTrigger,
+  DropdownMenuContent,
+  DropdownMenuItem,
+} from "@/components/ui/dropdown-menu";
+import { DotsHorizontalIcon } from "@radix-ui/react-icons";
 
 type TodoItemType = {
   id: number;
@@ -24,8 +31,22 @@ type TodoItemCardProps = {
 export function TodoItemCard({ data }: TodoItemCardProps) {
   return (
     <Card className="w-full transform transition duration-300 hover:scale-105">
-      <CardHeader>
+      <CardHeader className="flex">
         <CardTitle className="text-sm">{data.todo}</CardTitle>
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button variant="ghost" size="icon">
+              <DotsHorizontalIcon className="h-4 w-4" />
+              <span className="sr-only">More</span>
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align="end">
+            <DropdownMenuItem>Mark as unread</DropdownMenuItem>
+            <DropdownMenuItem>Star thread</DropdownMenuItem>
+            <DropdownMenuItem>Add label</DropdownMenuItem>
+            <DropdownMenuItem>Mute thread</DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
       </CardHeader>
       <CardContent></CardContent>
       <CardFooter className="flex justify-between py-0 pb-4">
