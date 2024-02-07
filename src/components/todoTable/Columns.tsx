@@ -26,7 +26,7 @@ export const columns: ColumnDef<TodoType>[] = [
         <div className="flex space-x-2">
           {label && <Badge variant="outline">{label.label}</Badge>}
           <span className="max-w-[500px] truncate font-medium">
-            {row.getValue("title")}
+            {row.getValue("todo")}
           </span>
         </div>
       );
