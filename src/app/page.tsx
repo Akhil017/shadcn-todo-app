@@ -1,3 +1,5 @@
+"use client";
+
 import { AddTodoInput } from "@/components/AddTodoInput";
 import { CustomButtons } from "@/components/CustomButton";
 import TodoList from "@/components/TodoList";

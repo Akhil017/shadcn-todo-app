@@ -17,7 +17,7 @@ export const columns: ColumnDef<TodoType>[] = [
   },
   {
     accessorKey: "todo",
-    header: ({ column }) => <TodoTableHeader column={column} title="Title" />,
+    header: ({ column }) => <TodoTableHeader column={column} title="Todo" />,
     cell: ({ row }) => {
       // const label = labels.find((label) => label.value === row.original.label);
       const label = { label: "dummy label" };
