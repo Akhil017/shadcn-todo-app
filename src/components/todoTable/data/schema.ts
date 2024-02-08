@@ -6,7 +6,7 @@ export const todoSchema = z.object({
   createdat: z.number(),
   tags: z.array(z.string()),
   status: z.string(),
-  priority: z.number(),
+  priority: z.string(),
 });
 
 export type TodoType = z.infer<typeof todoSchema>;

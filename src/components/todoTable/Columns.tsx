@@ -20,14 +20,29 @@ export const columns: ColumnDef<TodoType>[] = [
     header: ({ column }) => <TodoTableHeader column={column} title="Todo" />,
     cell: ({ row }) => {
       // const label = labels.find((label) => label.value === row.original.label);
-      const label = { label: "dummy label" };
-
       return (
         <div className="flex space-x-2">
-          {label && <Badge variant="outline">{label.label}</Badge>}
           <span className="max-w-[500px] truncate font-medium">
             {row.getValue("todo")}
           </span>
+        </div>
+      );
+    },
+  },
+  {
+    accessorKey: "tags",
+    header: ({ column }) => <TodoTableHeader column={column} title="Tags" />,
+    cell: ({ row }) => {
+      // const label = labels.find((label) => label.value === row.original.label);
+      const tags = row.getValue("tags");
+      console.log({ tags });
+      return (
+        <div className="flex space-x-2">
+          {tags?.map((tag: string) => (
+            <Badge key={tag} variant="outline">
+              {tag}
+            </Badge>
+          ))}
         </div>
       );
     },
