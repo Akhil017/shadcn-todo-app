@@ -7,6 +7,7 @@ import { Input } from "@/components/ui/input";
 import { TodoTableFilter } from "./TodoTableFilter";
 import { priorities, statuses } from "./data/Data";
 import { TodoTableViewOptions } from "./TodoTableViewOptions";
+import { TodoAddDialog } from "./TodoAddDialog";
 
 interface TodoTableToolbarProps<TData> {
   table: Table<TData>;
@@ -21,7 +22,7 @@ export function TodoTableToolbar<TData>({
     <div className="flex items-center justify-between">
       <div className="flex flex-1 items-center space-x-2">
         <Input
-          placeholder="Filter tasks..."
+          placeholder="Filter todos..."
           value={(table.getColumn("todo")?.getFilterValue() as string) ?? ""}
           onChange={(event) =>
             table.getColumn("todo")?.setFilterValue(event.target.value)
@@ -53,7 +54,10 @@ export function TodoTableToolbar<TData>({
           </Button>
         )}
       </div>
-      <TodoTableViewOptions table={table} />
+      <div className="flex space-x-4">
+        <TodoTableViewOptions table={table} />
+        <TodoAddDialog />
+      </div>
     </div>
   );
 }

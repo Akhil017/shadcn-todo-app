@@ -6,12 +6,13 @@ import { TodoTableHeader } from "./TodoTableHeader";
 import { TodoTableRowActions } from "./TodoTableRowActions";
 import { Badge } from "../ui/badge";
 import { labels, priorities, statuses } from "./data/Data";
+import { cn } from "@/lib/utils";
 
 export const columns: ColumnDef<TodoType>[] = [
   {
     accessorKey: "id",
-    header: ({ column }) => <TodoTableHeader column={column} title="Task" />,
-    cell: ({ row }) => <div className="w-[80px]">{row.getValue("id")}</div>,
+    header: ({ column }) => <TodoTableHeader column={column} title="" />,
+    cell: ({ row }) => <div className="w-10">{row.getValue("id")}</div>,
     enableSorting: false,
     enableHiding: false,
   },
@@ -60,9 +61,11 @@ export const columns: ColumnDef<TodoType>[] = [
       }
 
       return (
-        <div className="flex w-[100px] items-center">
+        <div className={cn("flex w-[100px] items-center")}>
           {status.icon && (
-            <status.icon className="mr-2 h-4 w-4 text-muted-foreground" />
+            <status.icon
+              className={cn("mr-2 h-4 w-4 text-muted-foreground", status.color)}
+            />
           )}
           <span>{status.label}</span>
         </div>

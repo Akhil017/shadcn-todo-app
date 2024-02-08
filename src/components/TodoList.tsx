@@ -27,13 +27,13 @@ const TODOS: TodoType[] = [
     createdat: 1670895695,
     priority: "medium",
     tags: ["home", "personal"],
-    status: "todo",
+    status: "done",
   },
   {
     id: 4,
     todo: "Do something nice for someone",
     createdat: 1670895695,
-    priority: "medium",
+    priority: "low",
     tags: ["home", "personal"],
     status: "todo",
   },
@@ -43,13 +43,13 @@ const TODOS: TodoType[] = [
     createdat: 1670895695,
     priority: "medium",
     tags: ["home", "personal"],
-    status: "todo",
+    status: "done",
   },
   {
     id: 6,
     todo: "Do something nice for someone",
     createdat: 1670895695,
-    priority: "medium",
+    priority: "high",
     tags: ["home", "personal"],
     status: "todo",
   },
@@ -57,16 +57,44 @@ const TODOS: TodoType[] = [
     id: 7,
     todo: "Do something nice for someone",
     createdat: 1670895695,
-    priority: "medium",
+    priority: "low",
     tags: ["home", "personal"],
-    status: "todo",
+    status: "done",
+  },
+  {
+    id: 7,
+    todo: "Do something nice for someone",
+    createdat: 1670895695,
+    priority: "low",
+    tags: ["home", "personal"],
+    status: "done",
+  },
+  {
+    id: 7,
+    todo: "Do something nice for someone",
+    createdat: 1670895695,
+    priority: "low",
+    tags: ["home", "personal"],
+    status: "done",
+  },
+  {
+    id: 7,
+    todo: "Do something nice for someone",
+    createdat: 1670895695,
+    priority: "low",
+    tags: ["home", "personal"],
+    status: "done",
+  },
+  {
+    id: 7,
+    todo: "Do something nice for someone",
+    createdat: 1670895695,
+    priority: "low",
+    tags: ["home", "personal"],
+    status: "done",
   },
 ];
 
 export default function TodoList() {
-  return (
-    <div className="grid grid-cols-1">
-      <TodoTable columns={columns} data={TODOS} />
-    </div>
-  );
+  return <TodoTable columns={columns} data={TODOS} />;
 }
