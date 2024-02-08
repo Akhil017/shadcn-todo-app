@@ -31,24 +31,6 @@ export const columns: ColumnDef<TodoType>[] = [
     },
   },
   {
-    accessorKey: "tags",
-    header: ({ column }) => <TodoTableHeader column={column} title="Tags" />,
-    cell: ({ row }) => {
-      // const label = labels.find((label) => label.value === row.original.label);
-      const tags = row.getValue("tags");
-      console.log({ tags });
-      return (
-        <div className="flex space-x-2">
-          {tags?.map((tag: string) => (
-            <Badge key={tag} variant="outline">
-              {tag}
-            </Badge>
-          ))}
-        </div>
-      );
-    },
-  },
-  {
     accessorKey: "status",
     header: ({ column }) => <TodoTableHeader column={column} title="Status" />,
     cell: ({ row }) => {
