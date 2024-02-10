@@ -1,9 +1,8 @@
 "use client";
 
-import TodoCards from "./todoCard/TodoCards";
 import { columns } from "./todoTable/Columns";
-import { TodoTable } from "./todoTable/TodoTable";
 import { TodoType } from "./todoTable/data/schema";
+import { TodoTableContainer } from "./todoTable/TodoTableContainer";
 
 const TODOS: TodoType[] = [
   {
@@ -97,6 +96,5 @@ const TODOS: TodoType[] = [
 ];
 
 export default function TodoList() {
-  return <TodoCards data={TODOS} />;
-  return <TodoTable columns={columns} data={TODOS} />;
+  return <TodoTableContainer columns={columns} data={TODOS} />;
 }
