@@ -23,6 +23,11 @@ type TodoCardItemProps = {
   data: TodoType;
 };
 
+const badgeClass: Record<string, string> = {
+  done: "bg-green-100 border-green-400 text-green-600",
+  todo: "bg-blue-100 border-blue-400 text-blue-600",
+};
+
 export function TodoCardItem({ data }: TodoCardItemProps) {
   return (
     <Card className="w-full">
@@ -55,7 +60,9 @@ export function TodoCardItem({ data }: TodoCardItemProps) {
       </div>
       <CardHeader className="pt-0">
         <div className="mb-2">
-          <Badge variant="outline">Todo</Badge>
+          <Badge variant="outline" className={badgeClass[data.status]}>
+            {data.status}
+          </Badge>
         </div>
         <CardTitle>{data.todo}</CardTitle>
       </CardHeader>
