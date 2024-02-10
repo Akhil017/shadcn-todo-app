@@ -1,6 +1,11 @@
 "use client";
 
-import { DotsHorizontalIcon } from "@radix-ui/react-icons";
+import {
+  CheckCircledIcon,
+  DotsHorizontalIcon,
+  Pencil1Icon,
+  TrashIcon,
+} from "@radix-ui/react-icons";
 import { Row } from "@tanstack/react-table";
 import { Button } from "@/components/ui/button";
 import {
@@ -40,26 +45,17 @@ export function TodoTableRowActions<TData>({
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="w-[160px]">
-        <DropdownMenuItem>Edit</DropdownMenuItem>
-        <DropdownMenuItem>Make a copy</DropdownMenuItem>
-        <DropdownMenuItem>Favorite</DropdownMenuItem>
-        <DropdownMenuSeparator />
-        <DropdownMenuSub>
-          <DropdownMenuSubTrigger>Labels</DropdownMenuSubTrigger>
-          <DropdownMenuSubContent>
-            <DropdownMenuRadioGroup value={task.todo}>
-              {labels.map((label) => (
-                <DropdownMenuRadioItem key={label.value} value={label.value}>
-                  {label.label}
-                </DropdownMenuRadioItem>
-              ))}
-            </DropdownMenuRadioGroup>
-          </DropdownMenuSubContent>
-        </DropdownMenuSub>
-        <DropdownMenuSeparator />
-        <DropdownMenuItem>
-          Delete
-          <DropdownMenuShortcut>⌘⌫</DropdownMenuShortcut>
+        <DropdownMenuItem className="flex space-x-2 items-center justify-start">
+          <Pencil1Icon className="text-gray-500" />
+          <span>Edit</span>
+        </DropdownMenuItem>
+        <DropdownMenuItem className="flex space-x-2 items-center justify-start">
+          <CheckCircledIcon className="text-green-600" />
+          <span>Mark as Done</span>
+        </DropdownMenuItem>
+        <DropdownMenuItem className="flex space-x-2 items-center justify-start">
+          <TrashIcon className="text-red-500 w-4 h-4" />
+          <span className="text-red-500">Delete</span>
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
