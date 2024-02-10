@@ -1,6 +1,5 @@
 "use client";
 
-import * as React from "react";
 import {
   ColumnDef,
   ColumnFiltersState,
@@ -14,14 +13,15 @@ import {
   getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table";
+import * as React from "react";
 
 import { Table, TableBody, TableCell, TableRow } from "@/components/ui/table";
 
-import { TodoTableToolbar } from "./TodoTableToolabr";
-import { TodoTablePagination } from "./TodoTablePagination";
-import { TodoTableCard } from "./TodoTableCard";
-import { TodoTable } from "./TodoTable";
 import { cn } from "@/lib/utils";
+import { TodoTable } from "./TodoTable";
+import { TodoTableCard } from "./TodoTableCard";
+import { TodoTablePagination } from "./TodoTablePagination";
+import { TodoTableToolbar } from "./TodoTableToolabr";
 
 interface TodoTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -66,13 +66,15 @@ export function TodoTableContainer<TData, TValue>({
   const renderTableBody = () => {
     if (!table.getRowModel().rows?.length) {
       return (
-        <TableBody>
-          <TableRow>
-            <TableCell colSpan={columns.length} className="h-24 text-center">
-              No results.
-            </TableCell>
-          </TableRow>
-        </TableBody>
+        <Table>
+          <TableBody>
+            <TableRow>
+              <TableCell colSpan={columns.length} className="h-24 text-center">
+                No results.
+              </TableCell>
+            </TableRow>
+          </TableBody>
+        </Table>
       );
     } else if (isCardView) {
       return <TodoTableCard table={table} />;
@@ -89,7 +91,7 @@ export function TodoTableContainer<TData, TValue>({
         isCardView={isCardView}
       />
       <div className={cn("rounded-md ", { border: !isCardView })}>
-        <Table>{renderTableBody()}</Table>
+        {renderTableBody()}
       </div>
       <TodoTablePagination table={table} />
     </div>

@@ -1,12 +1,11 @@
 "use client";
 
+import { cn } from "@/lib/utils";
 import { ColumnDef } from "@tanstack/react-table";
-import { TodoType } from "./data/schema";
 import { TodoTableHeader } from "./TodoTableHeader";
 import { TodoTableRowActions } from "./TodoTableRowActions";
-import { Badge } from "../ui/badge";
-import { labels, priorities, statuses } from "./data/Data";
-import { cn } from "@/lib/utils";
+import { priorities, statuses } from "./data/Data";
+import { TodoType } from "./data/schema";
 
 export const columns: ColumnDef<TodoType>[] = [
   {

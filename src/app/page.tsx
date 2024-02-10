@@ -1,6 +1,5 @@
 "use client";
 
-import { AddTodoInput } from "@/components/AddTodoInput";
 import TodoList from "@/components/TodoList";
 
 export default function Home() {

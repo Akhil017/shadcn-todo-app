@@ -1,13 +1,12 @@
 "use client";
 
-import { Cross2Icon, TableIcon } from "@radix-ui/react-icons";
-import { Table } from "@tanstack/react-table";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { Cross2Icon, TableIcon } from "@radix-ui/react-icons";
+import { Table } from "@tanstack/react-table";
+import { TodoAddDialog } from "./TodoAddDialog";
 import { TodoTableFilter } from "./TodoTableFilter";
 import { priorities, statuses } from "./data/Data";
-import { TodoTableViewOptions } from "./TodoTableViewOptions";
-import { TodoAddDialog } from "./TodoAddDialog";
 
 interface TodoTableToolbarProps<TData> {
   table: Table<TData>;
@@ -73,9 +72,9 @@ export function TodoTableToolbar<TData>({
               viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
               className="w-4 h-4"
             >
               <rect width="20" height="12" x="2" y="6" rx="2" />

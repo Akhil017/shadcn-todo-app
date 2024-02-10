@@ -1,13 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { Card, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import {
   ArrowUpIcon,
   CheckCircledIcon,
@@ -60,9 +54,9 @@ export function TodoCardItem({ data }: TodoCardItemProps) {
         </DropdownMenu>
       </div>
       <CardHeader className="pt-0">
-        <CardDescription className="mb-2">
+        <div className="mb-2">
           <Badge variant="outline">Todo</Badge>
-        </CardDescription>
+        </div>
         <CardTitle>{data.todo}</CardTitle>
       </CardHeader>
       <CardFooter className="flex items-center justify-between space-x-4">

@@ -1,9 +1,8 @@
 "use client";
 
-import * as React from "react";
 import { Table, flexRender } from "@tanstack/react-table";
-
 import {
+  Table as TableContainer,
   TableBody,
   TableCell,
   TableHead,
@@ -17,7 +16,7 @@ interface TodoTableProps<TData> {
 
 export function TodoTable<TData>({ table }: TodoTableProps<TData>) {
   return (
-    <>
+    <TableContainer>
       <TableHeader>
         {table.getHeaderGroups().map((headerGroup) => (
           <TableRow
@@ -54,6 +53,6 @@ export function TodoTable<TData>({ table }: TodoTableProps<TData>) {
             </TableRow>
           ))}
       </TableBody>
-    </>
+    </TableContainer>
   );
 }
