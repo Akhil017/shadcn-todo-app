@@ -1,7 +1,6 @@
 "use client";
 
 import { Table } from "@tanstack/react-table";
-import { TableBody } from "../ui/table";
 import { TodoCardItem } from "./TodoCardItem";
 import { TodoType } from "./data/schema";
 
