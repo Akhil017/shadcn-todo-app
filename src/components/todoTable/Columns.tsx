@@ -11,7 +11,7 @@ export const columns: ColumnDef<TodoType>[] = [
   {
     accessorKey: "id",
     header: ({ column }) => <TodoTableHeader column={column} title="" />,
-    cell: ({ row }) => <div className="w-10">{row.getValue("id")}</div>,
+    cell: ({ row }) => <div className="w-10">{row.index + 1}</div>,
     enableSorting: false,
     enableHiding: false,
   },
