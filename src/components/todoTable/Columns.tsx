@@ -1,10 +1,10 @@
 "use client";
 
-import { cn } from "@/lib/utils";
+import { cn, getPriority } from "@/lib/utils";
 import { ColumnDef } from "@tanstack/react-table";
 import { TodoTableHeader } from "./TodoTableHeader";
 import { TodoTableRowActions } from "./TodoTableRowActions";
-import { priorities, statuses } from "./data/Data";
+import { statuses } from "./data/Data";
 import { TodoType } from "./data/schema";
 
 export const columns: ColumnDef<TodoType>[] = [
@@ -62,9 +62,7 @@ export const columns: ColumnDef<TodoType>[] = [
       <TodoTableHeader column={column} title="Priority" />
     ),
     cell: ({ row }) => {
-      const priority = priorities.find(
-        (priority) => priority.value === row.getValue("priority")
-      );
+      const priority = getPriority(row.getValue("priority"));
 
       if (!priority) {
         return null;

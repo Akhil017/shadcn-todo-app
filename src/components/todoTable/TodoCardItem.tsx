@@ -3,7 +3,6 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import {
-  ArrowUpIcon,
   CheckCircledIcon,
   ClockIcon,
   DotsHorizontalIcon,
@@ -18,12 +17,15 @@ import {
   DropdownMenuTrigger,
 } from "../ui/dropdown-menu";
 import { TodoType } from "./data/schema";
+import dayjs from "dayjs";
+import { getPriority } from "@/lib/utils";
 
 type TodoCardItemProps = {
   data: TodoType;
 };
 
 export function TodoCardItem({ data }: TodoCardItemProps) {
+  const priority = getPriority(data.priority);
   return (
     <Card className="w-full">
       <div className="flex justify-end pr-4 pt-2">
@@ -61,11 +63,14 @@ export function TodoCardItem({ data }: TodoCardItemProps) {
       </CardHeader>
       <CardFooter className="flex items-center justify-between space-x-4">
         <div className="flex items-center space-x-2">
-          <ArrowUpIcon />
-          <span>high</span>
+          {priority?.icon ? <priority.icon /> : null}
+          <span>{priority?.label}</span>
         </div>
         <div className="flex items-center justify-start space-x-2">
-          <ClockIcon /> <span className="text-foreground">24 jan</span>
+          <ClockIcon />{" "}
+          <span className="text-foreground">
+            {dayjs(data.createdAt).format("DD MMM")}
+          </span>
         </div>
       </CardFooter>
     </Card>

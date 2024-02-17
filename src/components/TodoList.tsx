@@ -98,9 +98,14 @@ import Spin from "./Spin";
 
 export default function TodoList() {
   const { todos, isLoading } = useGetTodoList();
-  console.log({ todos, erfs });
+  console.log({ todos });
 
-  if (isLoading) return <Spin />;
+  if (isLoading)
+    return (
+      <div className="flex items-center justify-center h-[80vh]">
+        <Spin />
+      </div>
+    );
 
   return <TodoTableContainer columns={columns} data={todos} />;
 }
