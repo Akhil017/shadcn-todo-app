@@ -1,6 +1,6 @@
 "use client";
 
-import { cn, getPriority } from "@/lib/utils";
+import { cn, getPriority, getStatus } from "@/lib/utils";
 import { ColumnDef } from "@tanstack/react-table";
 import { TodoTableHeader } from "./TodoTableHeader";
 import { TodoTableRowActions } from "./TodoTableRowActions";
@@ -33,9 +33,7 @@ export const columns: ColumnDef<TodoType>[] = [
     accessorKey: "status",
     header: ({ column }) => <TodoTableHeader column={column} title="Status" />,
     cell: ({ row }) => {
-      const status = statuses.find(
-        (status) => status.value === row.getValue("status")
-      );
+      const status = getStatus(row.getValue("status"));
 
       if (!status) {
         return null;

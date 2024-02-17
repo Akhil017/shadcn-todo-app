@@ -18,7 +18,7 @@ import {
 } from "../ui/dropdown-menu";
 import { TodoType } from "./data/schema";
 import dayjs from "dayjs";
-import { getPriority } from "@/lib/utils";
+import { cn, getPriority, getStatus } from "@/lib/utils";
 
 type TodoCardItemProps = {
   data: TodoType;
@@ -26,6 +26,8 @@ type TodoCardItemProps = {
 
 export function TodoCardItem({ data }: TodoCardItemProps) {
   const priority = getPriority(data.priority);
+  const status = getStatus(data.status);
+
   return (
     <Card className="w-full">
       <div className="flex justify-end pr-4 pt-2">
@@ -57,7 +59,14 @@ export function TodoCardItem({ data }: TodoCardItemProps) {
       </div>
       <CardHeader className="pt-0">
         <div className="mb-2">
-          <Badge variant="outline">Todo</Badge>
+          <Badge
+            variant="outline"
+            className={cn(
+              `border border-${status?.color} text-${status?.color}`
+            )}
+          >
+            {status?.label}
+          </Badge>
         </div>
         <CardTitle>{data.todo}</CardTitle>
       </CardHeader>

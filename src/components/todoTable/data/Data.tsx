@@ -28,14 +28,14 @@ export const statuses = [
     value: "todo",
     label: "Todo",
     icon: CircleIcon,
-    color: "text-blue-600",
+    color: "blue-600",
   },
 
   {
     value: "done",
     label: "Done",
     icon: CheckCircledIcon,
-    color: "text-green-600",
+    color: "green-600",
   },
 ];
 
