@@ -64,7 +64,7 @@ export function TodoTableToolbar<TData>({
           size="sm"
           onClick={() => setIsCardView((prevVal) => !prevVal)}
         >
-          {isCardView ? (
+          {!isCardView ? (
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="24"

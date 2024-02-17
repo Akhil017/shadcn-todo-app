@@ -2,7 +2,9 @@ import { ThemeToggle } from "@/components/ThemeToggle";
 import { ThemeProvider } from "@/providers/ThemeProvider";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import { ErrorBoundary } from "react-error-boundary";
 import "./globals.css";
+import ErrorFallback from "@/components/ErrorFallback";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -28,8 +30,9 @@ export default function RootLayout({
           <div className="flex items-center justify-end px-8 py-2">
             <ThemeToggle />
           </div>
-
-          {children}
+          <ErrorBoundary FallbackComponent={ErrorFallback}>
+            {children}
+          </ErrorBoundary>
         </ThemeProvider>
       </body>
     </html>

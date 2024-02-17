@@ -97,8 +97,8 @@ import Spin from "./Spin";
 // ];
 
 export default function TodoList() {
-  const { todos, isError, isLoading } = useGetTodoList();
-  console.log({ todos });
+  const { todos, isLoading } = useGetTodoList();
+  console.log({ todos, erfs });
 
   if (isLoading) return <Spin />;
 
