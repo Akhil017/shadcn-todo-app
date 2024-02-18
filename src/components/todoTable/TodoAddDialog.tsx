@@ -10,10 +10,12 @@ import {
 } from "@/components/ui/dialog";
 import { PlusIcon } from "@radix-ui/react-icons";
 import { TodoAddForm } from "./TodoAddForm";
+import { useState } from "react";
 
 export function TodoAddDialog() {
+  const [showAddTodo, setShowAddTodo] = useState(false);
   return (
-    <Dialog>
+    <Dialog open={showAddTodo} onOpenChange={setShowAddTodo}>
       <DialogTrigger asChild>
         <Button size="sm" className="ml-auto h-[30px] flex">
           <PlusIcon className="mr-2 font-bold h-4 w-4" /> Todo
@@ -23,7 +25,7 @@ export function TodoAddDialog() {
         <DialogHeader>
           <DialogTitle>Create Todo</DialogTitle>
         </DialogHeader>
-        <TodoAddForm />
+        <TodoAddForm setShowAddTodo={setShowAddTodo} />
       </DialogContent>
     </Dialog>
   );

@@ -17,6 +17,7 @@ import { RadioGroup, RadioGroupItem } from "../ui/radio-group";
 import { Textarea } from "../ui/textarea";
 import { priorities } from "./data/Data";
 import { useAddTodo } from "@/hooks/useTodo";
+import { toast } from "sonner";
 
 const profileFormSchema = z.object({
   todo: z
@@ -32,7 +33,11 @@ const profileFormSchema = z.object({
 
 export type AddTodoFormValue = z.infer<typeof profileFormSchema>;
 
-export function TodoAddForm() {
+type TodoAddFormProps = {
+  setShowAddTodo: React.Dispatch<React.SetStateAction<boolean>>;
+};
+
+export function TodoAddForm({ setShowAddTodo }: TodoAddFormProps) {
   const { trigger } = useAddTodo();
 
   const form = useForm<AddTodoFormValue>({
@@ -42,7 +47,12 @@ export function TodoAddForm() {
   });
 
   function onSubmit(data: AddTodoFormValue) {
-    trigger(data);
+    trigger(data, {
+      onSuccess: () => {
+        setShowAddTodo(false);
+        toast.success("Todo has been created");
+      },
+    });
   }
 
   return (
@@ -91,50 +101,6 @@ export function TodoAddForm() {
                       </Label>
                     </div>
                   ))}
-                  {/* <div>
-                    <RadioGroupItem
-                      value="high"
-                      id="high"
-                      className="peer sr-only"
-                      aria-label="High"
-                    />
-                    <Label
-                      htmlFor="high"
-                      className="flex flex-col items-center justify-between rounded-md border-2 border-muted bg-transparent p-4 hover:bg-accent hover:text-accent-foreground peer-data-[state=checked]:border-primary [&:has([data-state=checked])]:border-primary"
-                    >
-                      High
-                    </Label>
-                  </div>
-
-                  <div>
-                    <RadioGroupItem
-                      value="medium"
-                      id="medium"
-                      className="peer sr-only"
-                      aria-label="Medium"
-                    />
-                    <Label
-                      htmlFor="medium"
-                      className="flex flex-col items-center justify-between rounded-md border-2 border-muted bg-transparent p-4 hover:bg-accent hover:text-accent-foreground peer-data-[state=checked]:border-primary [&:has([data-state=checked])]:border-primary"
-                    >
-                      Medium
-                    </Label>
-                  </div>
-
-                  <div>
-                    <RadioGroupItem
-                      value="low"
-                      id="low"
-                      className="peer sr-only"
-                      aria-label="Low"
-                    />
-                    <Label
-                      htmlFor="low"
-                      className="flex flex-col items-center justify-between rounded-md border-2 border-muted bg-transparent p-4 hover:bg-accent hover:text-accent-foreground peer-data-[state=checked]:border-primary [&:has([data-state=checked])]:border-primary"
-                    >
-                      Low
-                    </Label>
-                  </div> */}
                 </RadioGroup>
               </FormControl>
               <FormMessage />
@@ -145,29 +111,4 @@ export function TodoAddForm() {
       </form>
     </Form>
   );
-}
-
-{
-  /* <RadioGroup
-                  onValueChange={field.onChange}
-                  defaultValue={field.value}
-                  className="grid grid-cols-3 gap-4"
-                >
-                  {priorities.map((priorityItem) => (
-                    <div key={priorityItem.value}>
-                      <RadioGroupItem
-                        value={priorityItem.value}
-                        id={priorityItem.value}
-                        className="peer sr-only"
-                        aria-label={priorityItem.label}
-                      />
-                      <Label
-                        htmlFor="high"
-                        className="flex items-center justify-between rounded-md border-2 border-muted bg-transparent p-4 hover:bg-accent hover:text-accent-foreground peer-data-[state=checked]:border-primary [&:has([data-state=checked])]:border-primary"
-                      >
-                        {priorityItem.label}
-                      </Label>
-                    </div>
-                  ))}
-                </RadioGroup> */
 }

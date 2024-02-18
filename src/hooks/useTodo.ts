@@ -4,7 +4,6 @@ import { API_BASE_URL } from "@/config";
 import axios from "axios";
 import useSWR from "swr";
 import useSWRMutation from "swr/mutation";
-import { toast } from "sonner";
 
 const todoServer = axios.create({
   baseURL: API_BASE_URL,
@@ -41,8 +40,32 @@ export const useAddTodo = () => {
       populateCache: (newTodo: TodoType, todos: TodoType[] | undefined) => {
         return todos ? [...todos, newTodo] : [newTodo];
       },
-      onSuccess: () => {
-        toast.success("Todo has been created");
+    }
+  );
+
+  return {
+    trigger,
+    isMutating,
+    isError: error,
+  };
+};
+
+async function deleteTodo(url: string, arg: { _id: string }) {
+  console.log({ url, arg });
+  return await todoServer.delete(`${url}/${arg._id}`).then((res) => res.data);
+}
+
+export const useDeleteTodo = () => {
+  const { trigger, isMutating, error } = useSWRMutation(
+    "/todo",
+    (url, { arg }: { arg: { _id: string } }) => {
+      return deleteTodo(url, arg);
+    },
+    {
+      revalidate: false,
+      populateCache: (newTodo: TodoType, todos: TodoType[] | undefined) => {
+        const filteredTodos = todos?.filter((todo) => todo._id !== newTodo._id);
+        return filteredTodos ? [...filteredTodos] : [];
       },
     }
   );

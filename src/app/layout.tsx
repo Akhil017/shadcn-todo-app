@@ -5,6 +5,7 @@ import { Inter } from "next/font/google";
 import { ErrorBoundary } from "react-error-boundary";
 import "./globals.css";
 import ErrorFallback from "@/components/ErrorFallback";
+import { Toaster } from "@/components/ui/sonner";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -34,6 +35,7 @@ export default function RootLayout({
             {children}
           </ErrorBoundary>
         </ThemeProvider>
+        <Toaster />
       </body>
     </html>
   );
