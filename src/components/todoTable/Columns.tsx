@@ -20,7 +20,6 @@ export const columns: ColumnDef<TodoType>[] = [
     accessorKey: "todo",
     header: ({ column }) => <TodoTableHeader column={column} title="Todo" />,
     cell: ({ row }) => {
-      // const label = labels.find((label) => label.value === row.original.label);
       return (
         <div className="flex space-x-2">
           <span className="max-w-[500px] truncate font-medium">
@@ -44,9 +43,7 @@ export const columns: ColumnDef<TodoType>[] = [
         <div className={cn("flex w-[100px] items-center")}>
           {status.icon && (
             <status.icon
-              className={cn(
-                `mr-2 h-4 w-4 text-muted-foreground text-${status.color}`
-              )}
+              className={cn(`mr-2 h-4 w-4 text-muted-foreground`, status.class)}
             />
           )}
           <span>{status.label}</span>

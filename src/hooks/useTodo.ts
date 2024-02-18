@@ -4,6 +4,7 @@ import { API_BASE_URL } from "@/config";
 import axios from "axios";
 import useSWR from "swr";
 import useSWRMutation from "swr/mutation";
+import { toast } from "sonner";
 
 const todoServer = axios.create({
   baseURL: API_BASE_URL,
@@ -39,6 +40,9 @@ export const useAddTodo = () => {
       revalidate: false,
       populateCache: (newTodo: TodoType, todos: TodoType[] | undefined) => {
         return todos ? [...todos, newTodo] : [newTodo];
+      },
+      onSuccess: () => {
+        toast.success("Todo has been created");
       },
     }
   );

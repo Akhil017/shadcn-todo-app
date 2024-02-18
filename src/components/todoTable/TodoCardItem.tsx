@@ -30,7 +30,13 @@ export function TodoCardItem({ data }: TodoCardItemProps) {
 
   return (
     <Card className="w-full">
-      <div className="flex justify-end pr-4 pt-2">
+      <div className="flex items-center justify-between pl-6 pr-4 pt-2 mb-4">
+        <Badge
+          variant="outline"
+          className={cn(`border font-normal h-5`, status?.class)}
+        >
+          {status?.label}
+        </Badge>
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button
@@ -58,16 +64,11 @@ export function TodoCardItem({ data }: TodoCardItemProps) {
         </DropdownMenu>
       </div>
       <CardHeader className="pt-0">
-        <div className="mb-2">
-          <Badge
-            variant="outline"
-            className={cn(
-              `border border-${status?.color} text-${status?.color}`
-            )}
-          >
+        {/* <div className="mb-2">
+          <Badge variant="outline" className={cn(`border`, status?.class)}>
             {status?.label}
           </Badge>
-        </div>
+        </div> */}
         <CardTitle>{data.todo}</CardTitle>
       </CardHeader>
       <CardFooter className="flex items-center justify-between space-x-4">
