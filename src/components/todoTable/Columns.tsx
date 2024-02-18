@@ -6,6 +6,7 @@ import { TodoTableHeader } from "./TodoTableHeader";
 import { TodoTableRowActions } from "./TodoTableRowActions";
 import { statuses } from "./data/Data";
 import { TodoType } from "./data/schema";
+import { stat } from "fs";
 
 export const columns: ColumnDef<TodoType>[] = [
   {
@@ -43,7 +44,9 @@ export const columns: ColumnDef<TodoType>[] = [
         <div className={cn("flex w-[100px] items-center")}>
           {status.icon && (
             <status.icon
-              className={cn("mr-2 h-4 w-4 text-muted-foreground", status.color)}
+              className={cn(
+                `mr-2 h-4 w-4 text-muted-foreground text-${status.color}`
+              )}
             />
           )}
           <span>{status.label}</span>

@@ -16,6 +16,7 @@ import { Label } from "../ui/label";
 import { RadioGroup, RadioGroupItem } from "../ui/radio-group";
 import { Textarea } from "../ui/textarea";
 import { priorities } from "./data/Data";
+import { useAddTodo } from "@/hooks/useTodo";
 
 const profileFormSchema = z.object({
   todo: z
@@ -29,17 +30,19 @@ const profileFormSchema = z.object({
   priority: z.string(),
 });
 
-type ProfileFormValues = z.infer<typeof profileFormSchema>;
+export type AddTodoFormValue = z.infer<typeof profileFormSchema>;
 
 export function TodoAddForm() {
-  const form = useForm<ProfileFormValues>({
+  const { trigger } = useAddTodo();
+
+  const form = useForm<AddTodoFormValue>({
     defaultValues: { priority: "high" },
     resolver: zodResolver(profileFormSchema),
     mode: "onChange",
   });
 
-  function onSubmit(data: ProfileFormValues) {
-    console.log(data);
+  function onSubmit(data: AddTodoFormValue) {
+    trigger(data);
   }
 
   return (
