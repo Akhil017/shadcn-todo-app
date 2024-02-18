@@ -80,7 +80,7 @@ export function TodoAddDialog({
       updateTodo(updatePayload, {
         onSuccess: () => {
           setShowAddTodo(false);
-          toast.success("Todo has been created");
+          toast.success("Todo has been updated");
         },
       });
     }
@@ -88,11 +88,6 @@ export function TodoAddDialog({
 
   return (
     <Dialog open={showAddTodo} onOpenChange={setShowAddTodo}>
-      {/* <DialogTrigger asChild>
-        <Button size="sm" className="ml-auto h-[30px] flex">
-          <PlusIcon className="mr-2 font-bold h-4 w-4" /> Todo
-        </Button>
-      </DialogTrigger> */}
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
           <DialogTitle>Create Todo</DialogTitle>
@@ -148,7 +143,7 @@ export function TodoAddDialog({
                 </FormItem>
               )}
             />
-            <Button type="submit">Add Todo</Button>
+            <Button type="submit">{isEdit ? "Update Todo" : "Add Todo"}</Button>
           </form>
         </Form>
       </DialogContent>

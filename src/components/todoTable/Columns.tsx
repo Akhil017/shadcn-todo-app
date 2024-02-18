@@ -2,11 +2,9 @@
 
 import { cn, getPriority, getStatus } from "@/lib/utils";
 import { ColumnDef } from "@tanstack/react-table";
+import TodoItemActions from "./TodoItemActions";
 import { TodoTableHeader } from "./TodoTableHeader";
-import { TodoTableRowActions } from "./TodoTableRowActions";
-import { statuses } from "./data/Data";
-import { TodoType } from "./data/schema";
-import { stat } from "fs";
+import { TodoType, todoSchema } from "./data/schema";
 
 export const columns: ColumnDef<TodoType>[] = [
   {
@@ -81,6 +79,8 @@ export const columns: ColumnDef<TodoType>[] = [
   },
   {
     id: "actions",
-    cell: ({ row }) => <TodoTableRowActions row={row} />,
+    cell: ({ row }) => {
+      return <TodoItemActions data={todoSchema.parse(row.original)} />;
+    },
   },
 ];
