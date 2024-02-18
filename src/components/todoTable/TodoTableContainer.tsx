@@ -19,7 +19,7 @@ import { Table, TableBody, TableCell, TableRow } from "@/components/ui/table";
 
 import { cn } from "@/lib/utils";
 import { TodoTable } from "./TodoTable";
-import { TodoTableCard } from "./TodoTableCard";
+import { TodoTableCards } from "./TodoTableCards";
 import { TodoTablePagination } from "./TodoTablePagination";
 import { TodoTableToolbar } from "./TodoTableToolabr";
 
@@ -77,7 +77,7 @@ export function TodoTableContainer<TData, TValue>({
         </Table>
       );
     } else if (isCardView) {
-      return <TodoTableCard table={table} />;
+      return <TodoTableCards table={table} />;
     } else {
       return <TodoTable table={table} />;
     }

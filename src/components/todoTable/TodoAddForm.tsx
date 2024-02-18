@@ -31,7 +31,11 @@ const profileFormSchema = z.object({
   priority: z.string(),
 });
 
-export type AddTodoFormValue = z.infer<typeof profileFormSchema>;
+type AddTodoFormValue = z.infer<typeof profileFormSchema>;
+
+export type AddTodoPayload = Partial<AddTodoFormValue> & {
+  _id?: string;
+};
 
 type TodoAddFormProps = {
   setShowAddTodo: React.Dispatch<React.SetStateAction<boolean>>;

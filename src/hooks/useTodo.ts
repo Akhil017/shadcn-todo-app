@@ -1,18 +1,9 @@
-import { AddTodoFormValue } from "@/components/todoTable/TodoAddForm";
+import { AddTodoPayload } from "@/components/todoTable/TodoAddForm";
 import { TodoType } from "@/components/todoTable/data/schema";
 import { API_BASE_URL } from "@/config";
-import axios from "axios";
+import { addTodo, deleteTodo, getTodoList, updateTodo } from "@/services";
 import useSWR from "swr";
 import useSWRMutation from "swr/mutation";
-
-const todoServer = axios.create({
-  baseURL: API_BASE_URL,
-});
-
-async function getTodoList(url: string) {
-  console.log({ url });
-  return todoServer.get("/todo").then((res) => res.data);
-}
 
 export const useGetTodoList = () => {
   console.log({ API_BASE_URL });
@@ -24,15 +15,10 @@ export const useGetTodoList = () => {
   };
 };
 
-async function addTodo(url: string, arg: AddTodoFormValue) {
-  console.log({ url, arg });
-  return await todoServer.post(url, arg).then((res) => res.data);
-}
-
 export const useAddTodo = () => {
   const { trigger, isMutating, error } = useSWRMutation(
     "/todo",
-    (url, { arg }: { arg: AddTodoFormValue }) => {
+    (url, { arg }: { arg: AddTodoPayload }) => {
       return addTodo(url, arg);
     },
     {
@@ -50,10 +36,27 @@ export const useAddTodo = () => {
   };
 };
 
-async function deleteTodo(url: string, arg: { _id: string }) {
-  console.log({ url, arg });
-  return await todoServer.delete(`${url}/${arg._id}`).then((res) => res.data);
-}
+export const useUpdateTodo = () => {
+  const { trigger, isMutating, error } = useSWRMutation(
+    "/todo",
+    (url, { arg }: { arg: AddTodoPayload }) => {
+      return updateTodo(url, arg);
+    },
+    {
+      revalidate: false,
+      populateCache: (newTodo: TodoType, todos: TodoType[] | undefined) => {
+        const filteredTodos = todos?.filter((todo) => todo._id !== newTodo._id);
+        return filteredTodos ? [...filteredTodos, newTodo] : [];
+      },
+    }
+  );
+
+  return {
+    trigger,
+    isMutating,
+    isError: error,
+  };
+};
 
 export const useDeleteTodo = () => {
   const { trigger, isMutating, error } = useSWRMutation(
@@ -63,7 +66,10 @@ export const useDeleteTodo = () => {
     },
     {
       revalidate: false,
-      populateCache: (newTodo: TodoType, todos: TodoType[] | undefined) => {
+      populateCache: (
+        newTodo: { success: boolean; _id: string },
+        todos: TodoType[] | undefined
+      ) => {
         const filteredTodos = todos?.filter((todo) => todo._id !== newTodo._id);
         return filteredTodos ? [...filteredTodos] : [];
       },

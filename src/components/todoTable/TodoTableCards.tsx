@@ -8,7 +8,7 @@ interface TodoTableCardProps<TData> {
   table: Table<TData>;
 }
 
-export function TodoTableCard<TData>({ table }: TodoTableCardProps<TData>) {
+export function TodoTableCards<TData>({ table }: TodoTableCardProps<TData>) {
   return (
     <>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
