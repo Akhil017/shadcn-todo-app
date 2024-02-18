@@ -1,4 +1,4 @@
-import { AddTodoPayload } from "@/components/todoTable/TodoAddForm";
+import { AddTodoPayload } from "@/components/todoTable/TodoAddDialog";
 import { API_BASE_URL } from "@/config";
 import axios from "axios";
 

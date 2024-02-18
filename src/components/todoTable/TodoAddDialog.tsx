@@ -9,7 +9,7 @@ import {
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useAddTodo } from "@/hooks/useTodo";
+import { useAddTodo, useUpdateTodo } from "@/hooks/useTodo";
 import { toast } from "sonner";
 import {
   Form,
@@ -24,11 +24,7 @@ import { priorities } from "./data/Data";
 import { RadioGroup, RadioGroupItem } from "../ui/radio-group";
 import { Label } from "../ui/label";
 import { Button } from "../ui/button";
-
-type TodoAddDialogProps = {
-  showAddTodo: boolean;
-  setShowAddTodo: React.Dispatch<React.SetStateAction<boolean>>;
-};
+import type { TodoType } from "./data/schema";
 
 const addTodoSchema = z.object({
   todo: z
@@ -42,6 +38,14 @@ const addTodoSchema = z.object({
   priority: z.string(),
 });
 
+type TodoAddDialogProps = {
+  showAddTodo: boolean;
+  setShowAddTodo: React.Dispatch<React.SetStateAction<boolean>>;
+} & (
+  | { isEdit?: false; initialValue?: undefined }
+  | { isEdit: true; initialValue: TodoType }
+);
+
 type AddTodoFormValue = z.infer<typeof addTodoSchema>;
 
 export type AddTodoPayload = Partial<AddTodoFormValue> & {
@@ -51,22 +55,35 @@ export type AddTodoPayload = Partial<AddTodoFormValue> & {
 export function TodoAddDialog({
   showAddTodo,
   setShowAddTodo,
+  isEdit = false,
+  initialValue,
 }: TodoAddDialogProps) {
-  const { trigger } = useAddTodo();
+  const { trigger: addTodo } = useAddTodo();
+  const { trigger: updateTodo } = useUpdateTodo();
 
   const form = useForm<AddTodoFormValue>({
-    defaultValues: { priority: "high" },
+    defaultValues: initialValue || { priority: "high" },
     resolver: zodResolver(addTodoSchema),
     mode: "onChange",
   });
 
   function onSubmit(data: AddTodoFormValue) {
-    trigger(data, {
-      onSuccess: () => {
-        setShowAddTodo(false);
-        toast.success("Todo has been created");
-      },
-    });
+    if (!isEdit) {
+      addTodo(data, {
+        onSuccess: () => {
+          setShowAddTodo(false);
+          toast.success("Todo has been created");
+        },
+      });
+    } else {
+      const updatePayload = { ...data, _id: initialValue?._id };
+      updateTodo(updatePayload, {
+        onSuccess: () => {
+          setShowAddTodo(false);
+          toast.success("Todo has been created");
+        },
+      });
+    }
   }
 
   return (

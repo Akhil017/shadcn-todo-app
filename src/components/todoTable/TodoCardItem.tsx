@@ -21,6 +21,7 @@ import dayjs from "dayjs";
 import { cn, getPriority, getStatus } from "@/lib/utils";
 import { DeleteTodoAlert } from "../DeleteTodoAlert";
 import { useState } from "react";
+import { TodoAddDialog } from "./TodoAddDialog";
 
 type TodoCardItemProps = {
   data: TodoType;
@@ -28,6 +29,7 @@ type TodoCardItemProps = {
 
 export function TodoCardItem({ data }: TodoCardItemProps) {
   const [showDeleteDialog, setShowDeleteDialog] = useState(false);
+  const [showAddTodo, setShowAddTodo] = useState(false);
   const priority = getPriority(data.priority);
   const status = getStatus(data.status);
 
@@ -56,7 +58,10 @@ export function TodoCardItem({ data }: TodoCardItemProps) {
               className="w-[160px]"
               side="right"
             >
-              <DropdownMenuItem className="flex space-x-2 items-center justify-start">
+              <DropdownMenuItem
+                className="flex space-x-2 items-center justify-start"
+                onSelect={() => setShowAddTodo(true)}
+              >
                 <Pencil1Icon className="text-gray-500" />
                 <span>Edit</span>
               </DropdownMenuItem>
@@ -95,6 +100,12 @@ export function TodoCardItem({ data }: TodoCardItemProps) {
           </div>
         </CardFooter>
       </Card>
+      <TodoAddDialog
+        isEdit
+        setShowAddTodo={setShowAddTodo}
+        showAddTodo={showAddTodo}
+        initialValue={data}
+      />
       <DeleteTodoAlert
         _id={data._id}
         open={showDeleteDialog}

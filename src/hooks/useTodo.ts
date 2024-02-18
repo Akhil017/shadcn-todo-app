@@ -1,4 +1,4 @@
-import { AddTodoPayload } from "@/components/todoTable/TodoAddForm";
+import { AddTodoPayload } from "@/components/todoTable/TodoAddDialog";
 import { TodoType } from "@/components/todoTable/data/schema";
 import { API_BASE_URL } from "@/config";
 import { addTodo, deleteTodo, getTodoList, updateTodo } from "@/services";
@@ -45,8 +45,10 @@ export const useUpdateTodo = () => {
     {
       revalidate: false,
       populateCache: (newTodo: TodoType, todos: TodoType[] | undefined) => {
-        const filteredTodos = todos?.filter((todo) => todo._id !== newTodo._id);
-        return filteredTodos ? [...filteredTodos, newTodo] : [];
+        const updatedCache = todos?.map((todo) =>
+          todo._id === newTodo._id ? newTodo : todo
+        );
+        return updatedCache ? [...updatedCache] : [];
       },
     }
   );
