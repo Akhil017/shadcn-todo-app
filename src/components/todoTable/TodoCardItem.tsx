@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import {
   CheckCircledIcon,
+  CircleIcon,
   ClockIcon,
   DotsHorizontalIcon,
   Pencil1Icon,
@@ -22,6 +23,8 @@ import { cn, getPriority, getStatus } from "@/lib/utils";
 import { DeleteTodoAlert } from "../DeleteTodoAlert";
 import { useState } from "react";
 import { TodoAddDialog } from "./TodoAddDialog";
+import { useUpdateTodo } from "@/hooks/useTodo";
+import { toast } from "sonner";
 
 type TodoCardItemProps = {
   data: TodoType;
@@ -32,6 +35,22 @@ export function TodoCardItem({ data }: TodoCardItemProps) {
   const [showAddTodo, setShowAddTodo] = useState(false);
   const priority = getPriority(data.priority);
   const status = getStatus(data.status);
+  const nextStatus = data.status === "todo" ? "done" : "todo";
+
+  const { trigger } = useUpdateTodo();
+
+  const changeTodoStatus = () => {
+    const updatePayload = {
+      status: nextStatus,
+      _id: data?._id,
+    };
+    trigger(updatePayload, {
+      onSuccess: () => {
+        setShowAddTodo(false);
+        toast.success(`Status changed to ${nextStatus}`);
+      },
+    });
+  };
 
   return (
     <>
@@ -65,9 +84,16 @@ export function TodoCardItem({ data }: TodoCardItemProps) {
                 <Pencil1Icon className="text-gray-500" />
                 <span>Edit</span>
               </DropdownMenuItem>
-              <DropdownMenuItem className="flex space-x-2 items-center justify-start">
-                <CheckCircledIcon className="text-green-600" />
-                <span>Mark as Done</span>
+              <DropdownMenuItem
+                className="flex space-x-2 items-center justify-start"
+                onSelect={changeTodoStatus}
+              >
+                {data.status === "done" ? (
+                  <CircleIcon className="text-blue-600" />
+                ) : (
+                  <CheckCircledIcon className="text-green-600" />
+                )}
+                <span>Mark as {nextStatus}</span>
               </DropdownMenuItem>
               <DropdownMenuItem
                 className="flex space-x-2 items-center justify-start"
