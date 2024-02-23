@@ -26,7 +26,7 @@ interface TodoTableFilterProps<TData, TValue> {
   column?: Column<TData, TValue>;
   title?: string;
   options: {
-    color?: string;
+    class?: string;
     label: string;
     value: string;
     icon?: React.ComponentType<{ className?: string }>;
@@ -119,7 +119,7 @@ export function TodoTableFilter<TData, TValue>({
                       <option.icon
                         className={cn(
                           "mr-2 h-4 w-4 text-muted-foreground",
-                          option.color && option.color
+                          option.class && option.class
                         )}
                       />
                     )}

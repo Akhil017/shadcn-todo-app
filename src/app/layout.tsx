@@ -1,7 +1,10 @@
-import { ThemeToggle } from "@/components/ThemeToggle";
+import AppHeader from "@/components/AppHeader";
+import ErrorFallback from "@/components/ErrorFallback";
+import { Toaster } from "@/components/ui/sonner";
 import { ThemeProvider } from "@/providers/ThemeProvider";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import { ErrorBoundary } from "react-error-boundary";
 import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -25,12 +28,12 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <div className="flex items-center justify-end px-8 py-2">
-            <ThemeToggle />
-          </div>
-
-          {children}
+          <AppHeader />
+          <ErrorBoundary FallbackComponent={ErrorFallback}>
+            {children}
+          </ErrorBoundary>
         </ThemeProvider>
+        <Toaster />
       </body>
     </html>
   );

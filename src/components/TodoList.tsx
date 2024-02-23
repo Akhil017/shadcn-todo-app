@@ -1,100 +1,111 @@
 "use client";
 
+import { useGetTodoList } from "@/hooks/useTodo";
 import { columns } from "./todoTable/Columns";
-import { TodoType } from "./todoTable/data/schema";
 import { TodoTableContainer } from "./todoTable/TodoTableContainer";
+import Spin from "./Spin";
 
-const TODOS: TodoType[] = [
-  {
-    id: 1,
-    todo: "Do something nice for someone",
-    createdat: 1670895695,
-    priority: "medium",
-    tags: ["home", "personal"],
-    status: "todo",
-  },
-  {
-    id: 2,
-    todo: "Do something nice for someone",
-    createdat: 1670895695,
-    priority: "medium",
-    tags: ["home", "personal"],
-    status: "todo",
-  },
-  {
-    id: 3,
-    todo: "Do something nice for someone",
-    createdat: 1670895695,
-    priority: "medium",
-    tags: ["home", "personal"],
-    status: "done",
-  },
-  {
-    id: 4,
-    todo: "Do something nice for someone",
-    createdat: 1670895695,
-    priority: "low",
-    tags: ["home", "personal"],
-    status: "todo",
-  },
-  {
-    id: 5,
-    todo: "Do something nice for someone",
-    createdat: 1670895695,
-    priority: "medium",
-    tags: ["home", "personal"],
-    status: "done",
-  },
-  {
-    id: 6,
-    todo: "Do something nice for someone",
-    createdat: 1670895695,
-    priority: "high",
-    tags: ["home", "personal"],
-    status: "todo",
-  },
-  {
-    id: 7,
-    todo: "Do something nice for someone",
-    createdat: 1670895695,
-    priority: "low",
-    tags: ["home", "personal"],
-    status: "done",
-  },
-  {
-    id: 7,
-    todo: "Do something nice for someone",
-    createdat: 1670895695,
-    priority: "low",
-    tags: ["home", "personal"],
-    status: "done",
-  },
-  {
-    id: 7,
-    todo: "Do something nice for someone",
-    createdat: 1670895695,
-    priority: "low",
-    tags: ["home", "personal"],
-    status: "done",
-  },
-  {
-    id: 7,
-    todo: "Do something nice for someone",
-    createdat: 1670895695,
-    priority: "low",
-    tags: ["home", "personal"],
-    status: "done",
-  },
-  {
-    id: 7,
-    todo: "Do something nice for someone",
-    createdat: 1670895695,
-    priority: "low",
-    tags: ["home", "personal"],
-    status: "done",
-  },
-];
+// const TODOS: TodoType[] = [
+//   {
+//     id: 1,
+//     todo: "Do something nice for someone",
+//     createdat: 1670895695,
+//     priority: "medium",
+//     tags: ["home", "personal"],
+//     status: "todo",
+//   },
+//   {
+//     id: 2,
+//     todo: "Do something nice for someone",
+//     createdat: 1670895695,
+//     priority: "medium",
+//     tags: ["home", "personal"],
+//     status: "todo",
+//   },
+//   {
+//     id: 3,
+//     todo: "Do something nice for someone",
+//     createdat: 1670895695,
+//     priority: "medium",
+//     tags: ["home", "personal"],
+//     status: "done",
+//   },
+//   {
+//     id: 4,
+//     todo: "Do something nice for someone",
+//     createdat: 1670895695,
+//     priority: "low",
+//     tags: ["home", "personal"],
+//     status: "todo",
+//   },
+//   {
+//     id: 5,
+//     todo: "Do something nice for someone",
+//     createdat: 1670895695,
+//     priority: "medium",
+//     tags: ["home", "personal"],
+//     status: "done",
+//   },
+//   {
+//     id: 6,
+//     todo: "Do something nice for someone",
+//     createdat: 1670895695,
+//     priority: "high",
+//     tags: ["home", "personal"],
+//     status: "todo",
+//   },
+//   {
+//     id: 7,
+//     todo: "Do something nice for someone",
+//     createdat: 1670895695,
+//     priority: "low",
+//     tags: ["home", "personal"],
+//     status: "done",
+//   },
+//   {
+//     id: 7,
+//     todo: "Do something nice for someone",
+//     createdat: 1670895695,
+//     priority: "low",
+//     tags: ["home", "personal"],
+//     status: "done",
+//   },
+//   {
+//     id: 7,
+//     todo: "Do something nice for someone",
+//     createdat: 1670895695,
+//     priority: "low",
+//     tags: ["home", "personal"],
+//     status: "done",
+//   },
+//   {
+//     id: 7,
+//     todo: "Do something nice for someone",
+//     createdat: 1670895695,
+//     priority: "low",
+//     tags: ["home", "personal"],
+//     status: "done",
+//   },
+//   {
+//     id: 7,
+//     todo: "Do something nice for someone",
+//     createdat: 1670895695,
+//     priority: "low",
+//     tags: ["home", "personal"],
+//     status: "done",
+//   },
+// ];
 
 export default function TodoList() {
-  return <TodoTableContainer columns={columns} data={TODOS} />;
+  const { todos, isLoading } = useGetTodoList();
+  console.log({ todos });
+
+  if (isLoading)
+    return (
+      <div className="flex items-center justify-center h-[80vh]">
+        <Spin />
+      </div>
+    );
+
+  return <TodoTableContainer columns={columns} data={todos} />;
 }

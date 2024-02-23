@@ -1,12 +1,13 @@
 import { z } from "zod";
 
 export const todoSchema = z.object({
-  id: z.number(),
+  _id: z.string(),
   todo: z.string(),
-  createdat: z.number(),
-  tags: z.array(z.string()),
-  status: z.string(),
-  priority: z.string(),
+  priority: z.enum(["low", "medium", "high"]),
+  status: z.enum(["todo", "done"]),
+  createdAt: z.string(),
 });
 
 export type TodoType = z.infer<typeof todoSchema>;
+export type PriorityType = TodoType["priority"];
+export type StatusType = TodoType["status"];

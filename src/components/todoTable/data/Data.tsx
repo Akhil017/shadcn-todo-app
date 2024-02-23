@@ -8,34 +8,19 @@ import {
   CircleIcon,
 } from "@radix-ui/react-icons";
 
-export const labels = [
-  {
-    value: "bug",
-    label: "Bug",
-  },
-  {
-    value: "feature",
-    label: "Feature",
-  },
-  {
-    value: "documentation",
-    label: "Documentation",
-  },
-];
-
 export const statuses = [
   {
     value: "todo",
     label: "Todo",
     icon: CircleIcon,
-    color: "text-blue-600",
+    class: "text-blue-600 border-blue-600",
   },
 
   {
     value: "done",
     label: "Done",
     icon: CheckCircledIcon,
-    color: "text-green-600",
+    class: "text-green-600 border-green-600",
   },
 ];
 
