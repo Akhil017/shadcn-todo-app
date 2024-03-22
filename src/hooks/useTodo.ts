@@ -1,12 +1,10 @@
 import { AddTodoPayload } from "@/components/todoTable/TodoAddDialog";
 import { TodoType } from "@/components/todoTable/data/schema";
-import { API_BASE_URL } from "@/config";
 import { addTodo, deleteTodo, getTodoList, updateTodo } from "@/services";
 import useSWR from "swr";
 import useSWRMutation from "swr/mutation";
 
 export const useGetTodoList = () => {
-  console.log({ API_BASE_URL });
   const { data, error, isLoading } = useSWR(`/todo`, getTodoList);
   return {
     todos: data,

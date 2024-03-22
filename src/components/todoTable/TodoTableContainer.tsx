@@ -22,14 +22,13 @@ import { TodoTable } from "./TodoTable";
 import { TodoTableCards } from "./TodoTableCards";
 import { TodoTablePagination } from "./TodoTablePagination";
 import { TodoTableToolbar } from "./TodoTableToolabr";
+import { columns } from "./Columns";
 
 interface TodoTableProps<TData, TValue> {
-  columns: ColumnDef<TData, TValue>[];
   data: TData[];
 }
 
 export function TodoTableContainer<TData, TValue>({
-  columns,
   data,
 }: TodoTableProps<TData, TValue>) {
   const [rowSelection, setRowSelection] = React.useState({});
@@ -43,7 +42,7 @@ export function TodoTableContainer<TData, TValue>({
 
   const table = useReactTable({
     data,
-    columns,
+    columns: columns as ColumnDef<TData, TValue>[],
     state: {
       sorting,
       columnVisibility,

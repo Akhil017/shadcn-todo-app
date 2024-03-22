@@ -1,5 +1,3 @@
-"use client";
-
 import { cn, getPriority, getStatus } from "@/lib/utils";
 import { ColumnDef } from "@tanstack/react-table";
 import TodoItemActions from "./TodoItemActions";

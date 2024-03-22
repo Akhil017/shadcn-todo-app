@@ -1,9 +1,8 @@
-"use client";
+// import { useGetTodoList } from "@/hooks/useTodo";
 
-import { useGetTodoList } from "@/hooks/useTodo";
-import { columns } from "./todoTable/Columns";
 import { TodoTableContainer } from "./todoTable/TodoTableContainer";
-import Spin from "./Spin";
+// import Spin from "./Spin";
+import { getTodoList } from "@/services";
 
 // const TODOS: TodoType[] = [
 //   {
@@ -96,16 +95,17 @@ import Spin from "./Spin";
 //   },
 // ];
 
-export default function TodoList() {
-  const { todos, isLoading } = useGetTodoList();
-  console.log({ todos });
+export default async function TodoList() {
+  const todos = await getTodoList();
 
-  if (isLoading)
-    return (
-      <div className="flex items-center justify-center h-[80vh]">
-        <Spin />
-      </div>
-    );
+  // if (isLoading)
+  //   return (
+  //     <div className="flex items-center justify-center h-[80vh]">
+  //       <Spin />
+  //     </div>
+  //   );
 
-  return <TodoTableContainer columns={columns} data={todos} />;
+  // return <p>Todo list</p>;
+
+  return <TodoTableContainer data={todos} />;
 }

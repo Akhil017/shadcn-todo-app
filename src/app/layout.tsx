@@ -1,7 +1,7 @@
 import AppHeader from "@/components/AppHeader";
 import ErrorFallback from "@/components/ErrorFallback";
 import { Toaster } from "@/components/ui/sonner";
-import { ThemeProvider } from "@/providers/ThemeProvider";
+import { Providers } from "@/providers";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { ErrorBoundary } from "react-error-boundary";
@@ -22,7 +22,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={inter.className}>
-        <ThemeProvider
+        <Providers
           attribute="class"
           defaultTheme="system"
           enableSystem
@@ -32,7 +32,7 @@ export default function RootLayout({
           <ErrorBoundary FallbackComponent={ErrorFallback}>
             {children}
           </ErrorBoundary>
-        </ThemeProvider>
+        </Providers>
         <Toaster />
       </body>
     </html>
