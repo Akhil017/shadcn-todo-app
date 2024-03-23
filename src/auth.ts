@@ -40,7 +40,6 @@ export const {
       if (account?.provider === "google") {
         if (account?.id_token) {
           try {
-            console.log({ id_token: account.id_token });
             const res = await axios.post(
               `${process.env.NEXT_PUBLIC_API_BASE_URL}/auth/google`,
               null,
@@ -50,8 +49,6 @@ export const {
                 },
               }
             );
-
-            console.log({ insid_jwt: res.data });
 
             user.id = "resr_id";
             // user.id = res.data._id;
@@ -68,7 +65,6 @@ export const {
     },
     async session({ session, user, token }: any) {
       if (session) {
-        console.log("inside session");
         session.user.id = token.id;
         session.user.accessToken = token.accessToken;
       }

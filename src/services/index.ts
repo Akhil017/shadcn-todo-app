@@ -8,7 +8,6 @@ export const todoServer = axios.create({
 
 todoServer.interceptors.request.use(async function (config) {
   const session = await getSession();
-  console.log({ session_inside_interceptors: session });
   config.headers.Authorization = `Bearer ${session?.user?.accessToken}`;
   return config;
 });
