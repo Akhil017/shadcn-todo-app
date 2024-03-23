@@ -12,11 +12,10 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Icons } from "@/components/Icons";
-import logoLight from "@/assets/logo-light.svg";
 
 function SignIn() {
   return (
-    <div className="flex items-center justify-center h-[80vh] px-6">
+    <div className="relative flex items-center justify-center h-[80vh] px-6">
       <div className="absolute -z-10 inset-0">
         <Image
           src={signInBg}
@@ -29,12 +28,6 @@ function SignIn() {
         <CardHeader>
           <CardTitle className="text-xl text-center ">
             <div className="flex flex-col items-center justify-center gap-2">
-              <Image
-                src={logoLight}
-                alt="aks todo logo"
-                width={40}
-                height={40}
-              />
               {`Welcome to Ak's todo list`}
             </div>
           </CardTitle>
@@ -47,7 +40,7 @@ function SignIn() {
             <Button
               variant="outline"
               className="w-full items-center justify-center gap-2 py-5"
-              onClick={() => signIn("google")}
+              onClick={() => signIn("google", { callbackUrl: "/" })}
             >
               <Icons.google className="w-6 h-6" />
               Continue with Google
@@ -57,7 +50,7 @@ function SignIn() {
             <Button
               variant="outline"
               className="w-full flex items-center justify-center gap-2 py-5"
-              onClick={() => signIn("github")}
+              onClick={() => signIn("github", { callbackUrl: "/" })}
             >
               <Icons.github className="w-6 h-6 " />
               Continue with GitHub
