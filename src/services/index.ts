@@ -1,11 +1,10 @@
 import { AddTodoPayload } from "@/components/todoTable/TodoAddDialog";
-import { API_BASE_URL } from "@/config";
 import axios from "axios";
 
-console.log({ api_base_url: API_BASE_URL });
+console.log({ baseurl: process.env.NEXT_PUBLIC_API_BASE_URL });
 
 const todoServer = axios.create({
-  baseURL: API_BASE_URL,
+  baseURL: process.env.NEXT_PUBLIC_API_BASE_URL,
 });
 
 export async function getTodoList() {
