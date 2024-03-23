@@ -98,7 +98,6 @@ import Spin from "./Spin";
 
 export default function TodoList() {
   const { todos, isLoading } = useGetTodoList();
-  console.log({ todos });
 
   if (isLoading)
     return (
