@@ -24,7 +24,7 @@ function SignIn() {
           style={{ objectFit: "cover" }}
         />
       </div>
-      <Card className="mx-auto w-full lg:w-[400px]">
+      <Card className="mx-auto w-full sm:w-[400px]">
         <CardHeader>
           <CardTitle className="text-xl text-center ">
             <div className="flex flex-col items-center justify-center gap-2">
@@ -46,7 +46,7 @@ function SignIn() {
               Continue with Google
             </Button>
           </div>
-          <div className="grid gap-4 mt-4">
+          {/* <div className="grid gap-4 mt-4">
             <Button
               variant="outline"
               className="w-full flex items-center justify-center gap-2 py-5"
@@ -55,7 +55,7 @@ function SignIn() {
               <Icons.github className="w-6 h-6 " />
               Continue with GitHub
             </Button>
-          </div>
+          </div> */}
         </CardContent>
       </Card>
     </div>

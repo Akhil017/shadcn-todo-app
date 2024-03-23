@@ -1,6 +1,9 @@
+import axios from "axios";
 import NextAuth from "next-auth";
 import GithubProvider from "next-auth/providers/github";
 import GoogleProvider from "next-auth/providers/google";
+import { todoServer } from "./services";
+import { User } from "next-auth";
 
 const GITHUB_CLIENT_ID = process.env.GITHUB_CLIENT_ID;
 const GITHUB_CLIENT_SECRET = process.env.GITHUB_CLIENT_SECRET;
@@ -33,14 +36,46 @@ export const {
     }),
   ],
   callbacks: {
-    // usually not needed here we are fixing a bug in next auth
-    async session({ session, user }: any) {
-      if (session && user) {
-        session.user.id = user.id;
-      }
+    async jwt({ token, account, user }) {
+      if (account?.provider === "google") {
+        if (account?.id_token) {
+          try {
+            console.log({ id_token: account.id_token });
+            const res = await axios.post(
+              `${process.env.NEXT_PUBLIC_API_BASE_URL}/auth/google`,
+              null,
+              {
+                headers: {
+                  Authorization: `Bearer ${account.id_token}`,
+                },
+              }
+            );
 
+            console.log({ insid_jwt: res.data });
+
+            user.id = "resr_id";
+            // user.id = res.data._id;
+            // user.token = res.data.token;
+
+            token.id = res.data._id;
+            token.accessToken = res.data.token;
+          } catch (error) {
+            console.log({ error });
+          }
+        }
+      }
+      return token;
+    },
+    async session({ session, user, token }: any) {
+      if (session) {
+        console.log("inside session");
+        session.user.id = token.id;
+        session.user.accessToken = token.accessToken;
+      }
       return session;
     },
+
+    // usually not needed here we are fixing a bug in next auth
   },
   pages: {
     signIn: "/api/auth/signin",

@@ -7,7 +7,7 @@ import { redirect } from "next/navigation";
 
 export default function Home() {
   const { data: session, status } = useSession();
-
+  console.log({ status });
   if (status === "loading") {
     return (
       <div className="flex items-center justify-center h-[80vh]">
