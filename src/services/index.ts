@@ -1,6 +1,7 @@
 import { AddTodoPayload } from "@/components/todoTable/TodoAddDialog";
 import { getSession } from "next-auth/react";
 import axios from "axios";
+import { redirect } from "next/navigation";
 
 export const todoServer = axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_BASE_URL,
@@ -11,6 +12,15 @@ todoServer.interceptors.request.use(async function (config) {
   config.headers.Authorization = `Bearer ${session?.user?.accessToken}`;
   return config;
 });
+
+todoServer.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    if (error.response.staus === 401) {
+      redirect("/api/auth/signin");
+    }
+  }
+);
 
 export async function getTodoList() {
   return todoServer.get("/todo").then((res) => res.data);

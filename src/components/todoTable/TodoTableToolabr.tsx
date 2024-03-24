@@ -70,6 +70,7 @@ export function TodoTableToolbar<TData>({
             <div className="flex space-x-4">
               {/* <TodoTableViewOptions table={table} /> */}
               <Button
+                className="hidden md:inline-flex"
                 variant="outline"
                 size="sm"
                 onClick={() => setIsCardView((prevVal) => !prevVal)}
