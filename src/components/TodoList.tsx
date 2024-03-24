@@ -4,6 +4,7 @@ import { useGetTodoList } from "@/hooks/useTodo";
 import { columns } from "./todoTable/Columns";
 import { TodoTableContainer } from "./todoTable/TodoTableContainer";
 import Spin from "./Spin";
+import EmptyTodo from "./EmptyTodo";
 
 // const TODOS: TodoType[] = [
 //   {
@@ -105,6 +106,10 @@ export default function TodoList() {
         <Spin />
       </div>
     );
+
+  if (!todos.length) {
+    return <EmptyTodo />;
+  }
 
   return <TodoTableContainer columns={columns} data={todos} />;
 }
