@@ -3,10 +3,11 @@ import { Button } from "./ui/button";
 import { Card, CardContent } from "./ui/card";
 import { useState } from "react";
 import { TodoAddDialog } from "./todoTable/TodoAddDialog";
+import { cn } from "@/lib/utils";
 
-function PlaceholderCard() {
+function PlaceholderCard({ className }: { className?: string }) {
   return (
-    <Card className="w-80 border  shadow-sm">
+    <Card className={cn("w-60 lg:w-80 border  shadow-sm", className)}>
       <CardContent className="flex items-center justify-between gap-4 p-4">
         <div className="w-10 h-10 bg-secondary rounded-md" />
         <div className="flex flex-col flex-1 justify-between gap-2">
@@ -24,7 +25,7 @@ function EmptyTodo() {
   return (
     <>
       <div className="w-full flex items-center justify-center h-[70vh]">
-        <div className="w-80 relative h-64 flex items-end">
+        <div className="w-60 lg:w-80 relative h-64 flex items-end">
           <div className="absolute z-10 top-0 scale-x-90">
             <PlaceholderCard />
           </div>
