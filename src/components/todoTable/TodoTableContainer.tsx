@@ -50,6 +50,7 @@ export function TodoTableContainer<TData, TValue>({
       rowSelection,
       columnFilters,
     },
+    initialState: { pagination: { pageSize: 20 } },
     enableRowSelection: true,
     onRowSelectionChange: setRowSelection,
     onSortingChange: setSorting,

@@ -88,7 +88,7 @@ export function TodoAddDialog({
 
   return (
     <Dialog open={showAddTodo} onOpenChange={setShowAddTodo}>
-      <DialogContent className="sm:max-w-[425px]">
+      <DialogContent className="w-[380px] sm:max-w-[425px]">
         <DialogHeader>
           <DialogTitle>Create Todo</DialogTitle>
         </DialogHeader>
